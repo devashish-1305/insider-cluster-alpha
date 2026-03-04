@@ -9,10 +9,7 @@ logging.getLogger("yfinance").setLevel(logging.CRITICAL)
 
 
 def load_tickers_from_prices(price_path: str) -> list:
-    """
-    Read the price CSV header row to get all tickers that were
-    successfully downloaded .
-    """
+    
 
     df = pd.read_csv(price_path, nrows=0)
     
@@ -22,10 +19,7 @@ def load_tickers_from_prices(price_path: str) -> list:
 
 
 def load_existing_progress(output_path: str) -> dict:
-    """
-    If we already started collecting and saved partial results,
-    load them so we can resume without re-downloading.
-    """
+    
     if os.path.exists(output_path):
         df = pd.read_csv(output_path)
         existing = dict(zip(df["ticker"], df["market_cap"]))
@@ -35,10 +29,7 @@ def load_existing_progress(output_path: str) -> dict:
 
 
 def fetch_market_cap(ticker_symbol: str) -> float:
-    """
-    Fetch the marketCap field from yfinance .info for a single ticker.
-    Returns the market cap as a float, or None if unavailable.
-    """
+    
     try:
         tk = yf.Ticker(ticker_symbol)
         info = tk.info
@@ -65,10 +56,7 @@ def collect_market_caps(
     sleep_between: float = 0.5,
     save_every: int = 50
 ):
-    """
-    Main collection loop. Downloads market cap for each ticker,
-    saves progress every `save_every` tickers to prevent data loss.
-    """
+    
     tickers = load_tickers_from_prices(price_path)
     collected = load_existing_progress(output_path)
     
@@ -129,7 +117,6 @@ def collect_market_caps(
 
 
 def _save_checkpoint(collected: dict, output_path: str):
-    """Save current collected data to CSV."""
     df = pd.DataFrame([
         {"ticker": t, "market_cap": v} 
         for t, v in collected.items()
