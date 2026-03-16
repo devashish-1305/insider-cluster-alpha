@@ -103,14 +103,3 @@ if __name__ == '__main__':
     assert -0.5 < car30_mean < 0.5
     assert Path('results.md').exists()
     assert Path('results.md').stat().st_size > 500
-
-    print(summary[['window', 'n', 'mean', 'median', 't_stat', 'p_value',
-                    'hit_rate', 'significant']].to_string(index=False))
-    print()
-    car30 = summary[summary['window'] == 'CAR(0,30)'].iloc[0]
-    print(f"PRIMARY TEST — CAR(0,30): mean={car30['mean']:.4f}, "
-          f"t={car30['t_stat']:.3f}, p={car30['p_value']:.6f}, "
-          f"hit_rate={car30['hit_rate']:.3f}, "
-          f"significant={'YES' if car30['significant'] else 'NO'}")
-    print()
-    print('results.md written — all checks passed')

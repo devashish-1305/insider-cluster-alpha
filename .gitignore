@@ -1,8 +1,22 @@
-cat > .gitignore << 'EOF'
-venv/
+# Python
 __pycache__/
-.DS_Store
 *.pyc
-data/raw/*.csv
+
+# Virtual environments
+venv/
+.venv/
+
+# OS
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (do not commit data files)
+data/
 !data/raw/.gitkeep
-EOF
+!data/processed/.gitkeep
+
+paper/paper.html
+paper/paper.jpeg
+paper/paper.png

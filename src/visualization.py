@@ -130,7 +130,3 @@ if __name__ == '__main__':
 
     n_car30 = df['car_30'].notna().sum()
     assert n_car30 > 2000
-
-    print(f'3 figures saved to paper/figures/')
-    print(f'CAR(0,30) observations plotted: {n_car30}')
-    print('All checks passed')
